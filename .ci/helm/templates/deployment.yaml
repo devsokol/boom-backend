@@ -1,0 +1,91 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "helm-boom-backend.fullname" . }}
+  labels:
+    {{- include "helm-boom-backend.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "helm-boom-backend.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "helm-boom-backend.selectorLabels" . | nindent 8 }}
+    spec:
+      volumes:
+      - name: env
+        configMap:
+          name: boom-back-conf
+      - name: firebase-config
+        configMap:
+          name: firebase-push
+      - name: php
+        configMap:
+          name: php
+      imagePullSecrets:
+        - name: {{ .Values.imagePullSecrets }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          volumeMounts:
+          - mountPath: /var/www/html/.env
+            name: env
+            subPath: .env
+          - mountPath: /var/www/html/firebaseConfig.json
+            name: firebase-config
+            subPath: firebaseConfig.json
+          - mountPath: /usr/local/etc/php/php.ini
+            name: php
+            subPath: php.ini
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
+            - name: https
+              containerPort: 443
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: https
+              scheme: HTTPS
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /
+              port: https
+              scheme: HTTPS
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 5
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/bash", "-c", "/usr/local/bin/php", "artisan", "optimize"]
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

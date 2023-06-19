@@ -1,0 +1,50 @@
+# Default values for helm-ask-back.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: gl.pettersonapps.com:5050/backend-web/boom_backend
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: dummy
+
+imagePullSecrets: "regcred"
+nameOverride: ""
+fullnameOverride: ""
+
+
+podAnnotations: {}
+
+# podSecurityContext:
+#   fsGroup: 1000
+
+securityContext:
+  runAsUser: 0
+
+service:
+  type: ClusterIP
+  port: 443
+
+
+resources:
+  limits:
+    cpu: 1
+    memory: 2G
+  requests:
+    cpu: 500m
+    memory: 2G
+
+autoscaling:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 95
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

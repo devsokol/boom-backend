@@ -1,0 +1,13 @@
+{
+    "name": "MobileV1",
+    "alias": "mobilev1",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\MobileV1\\Providers\\MobileV1ServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

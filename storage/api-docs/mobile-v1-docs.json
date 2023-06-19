@@ -1,0 +1,2684 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Boom API Mobile Documentation",
+        "description": "Boom",
+        "contact": {
+            "email": "yaryna.vitaliy@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost/mobile/v1",
+            "description": "Boom Api Endpoint"
+        }
+    ],
+    "paths": {
+        "/actor/me": {
+            "post": {
+                "tags": [
+                    "Actor"
+                ],
+                "summary": "Get an actor",
+                "description": "Get an actor info",
+                "operationId": "getActor",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
+                    },
+                    "403": {
+                        "description": "This action is unauthorized."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Actor"
+                ],
+                "summary": "Delete an actor",
+                "description": "Delete an actor",
+                "operationId": "deleteActor",
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Unauthenticated. / This action is unauthorized."
+                    },
+                    "403": {
+                        "description": "This action is unauthorized."
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/actor-notifications": {
+            "get": {
+                "tags": [
+                    "ActorNotification"
+                ],
+                "summary": "Fetch notifications",
+                "description": "Fetch notifications",
+                "operationId": "fetchNotifications",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/actor-notifications/{notification_id}/mark-as-read": {
+            "get": {
+                "tags": [
+                    "ActorNotification"
+                ],
+                "summary": "Change notification status",
+                "description": "Change notification status as read",
+                "operationId": "changeNotificationStatusAsRead",
+                "parameters": [
+                    {
+                        "name": "notification_id",
+                        "in": "path",
+                        "description": "Notification ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/applications/role/{id}/apply": {
+            "get": {
+                "tags": [
+                    "Application"
+                ],
+                "summary": "Apply for a role",
+                "description": "Apply for a role",
+                "operationId": "applicationApplyForRole",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Role ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "424": {
+                        "description": "Failed Dependency"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/applications": {
+            "get": {
+                "tags": [
+                    "Application"
+                ],
+                "summary": "Fetch own applications",
+                "description": "Fetch own applications",
+                "operationId": "fetchApplications",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
+                    },
+                    "403": {
+                        "description": "This action is unauthorized."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/applications/{application_id}/show": {
+            "get": {
+                "tags": [
+                    "Application"
+                ],
+                "summary": "Fetch an application",
+                "description": "Fetch an application",
+                "operationId": "fetchApplication",
+                "parameters": [
+                    {
+                        "name": "application_id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
+                    },
+                    "403": {
+                        "description": "This action is unauthorized."
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/applications/{application_id}/accept-approval": {
+            "get": {
+                "tags": [
+                    "Application"
+                ],
+                "summary": "Accept the offer for the main role",
+                "description": "Accept the offer for the main role by an application_id",
+                "operationId": "acceptOfferForMainRole",
+                "parameters": [
+                    {
+                        "name": "application_id",
+                        "in": "path",
+                        "description": "Application ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
+                    },
+                    "403": {
+                        "description": "This action is unauthorized."
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/applications/{application_id}/reject-approval": {
+            "post": {
+                "tags": [
+                    "Application"
+                ],
+                "summary": "Decline the offer for the main role",
+                "description": "Decline the offer for the main role by an application_id",
+                "operationId": "declineOfferForMainRole",
+                "parameters": [
+                    {
+                        "name": "application_id",
+                        "in": "path",
+                        "description": "Application ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "reason": {
+                                        "description": "reason of rejection",
+                                        "type": "string",
+                                        "example": "Some message will be here..."
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
+                    },
+                    "403": {
+                        "description": "This action is unauthorized."
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/application-selftapes/{application_id}/detail": {
+            "get": {
+                "tags": [
+                    "ApplicationSelftape"
+                ],
+                "summary": "Get an application selftape detail",
+                "description": "Get an application selftape detail",
+                "operationId": "getApplicationSelftapeDetail",
+                "parameters": [
+                    {
+                        "name": "application_id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
+                    },
+                    "403": {
+                        "description": "This action is unauthorized."
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/application-selftapes/{application_id}/sended": {
+            "get": {
+                "tags": [
+                    "ApplicationSelftape"
+                ],
+                "summary": "Change status to sended",
+                "description": "Change the status to sended for application selftape by application id",
+                "operationId": "changeApplicationSelftapeStatusToSended",
+                "parameters": [
+                    {
+                        "name": "application_id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
+                    },
+                    "403": {
+                        "description": "This action is unauthorized."
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/application-selftapes/{application_id}/reject": {
+            "get": {
+                "tags": [
+                    "ApplicationSelftape"
+                ],
+                "summary": "Change status to reject",
+                "description": "Change the status to rejected for application selftape by application id",
+                "operationId": "changeApplicationSelftapeStatusToRejected",
+                "parameters": [
+                    {
+                        "name": "application_id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
+                    },
+                    "403": {
+                        "description": "This action is unauthorized."
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/application-selftapes/{application_id}/provide": {
+            "post": {
+                "tags": [
+                    "ApplicationSelftape"
+                ],
+                "summary": "Store a new resource",
+                "operationId": "storeAdditionSelftapeForActor",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "attachments": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "file": {
+                                                    "description": "Attachment file.",
+                                                    "type": "string",
+                                                    "format": "binary"
+                                                },
+                                                "link": {
+                                                    "description": "Attachment link. Either 'file' or 'link' property is required.",
+                                                    "type": "string"
+                                                },
+                                                "type": {
+                                                    "description": "Attachment type.",
+                                                    "type": "string"
+                                                },
+                                                "description": {
+                                                    "description": "Attachment description.",
+                                                    "type": "string",
+                                                    "nullable": true
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "save_to_profile": {
+                                        "description": "Save to profile flag",
+                                        "type": "boolean",
+                                        "nullable": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Missing content",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/actor/attachments": {
+            "post": {
+                "tags": [
+                    "Attachments"
+                ],
+                "summary": "Store a new resource",
+                "description": "Store a new resource.",
+                "operationId": "storeResource",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "attachments": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "file": {
+                                                    "description": "Attachment file.",
+                                                    "type": "string",
+                                                    "format": "binary"
+                                                },
+                                                "link": {
+                                                    "description": "Attachment link. Either 'file' or 'link' property is required.",
+                                                    "type": "string"
+                                                },
+                                                "type": {
+                                                    "description": "Attachment type.",
+                                                    "type": "string"
+                                                },
+                                                "description": {
+                                                    "description": "Attachment description.",
+                                                    "type": "string",
+                                                    "nullable": true
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Resource successfully stored",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/actor/attachments/{attachment}": {
+            "delete": {
+                "tags": [
+                    "Attachments"
+                ],
+                "summary": "Delete attachment",
+                "description": "Deletes an attachment for the authenticated user",
+                "operationId": "3232236e942986b20bf40c2779c2950a",
+                "parameters": [
+                    {
+                        "name": "attachment",
+                        "in": "path",
+                        "description": "Attachment ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Forbidden"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Attachment not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/auditions/{application_id}/detail": {
+            "get": {
+                "tags": [
+                    "Audition"
+                ],
+                "summary": "Get an audition detail",
+                "description": "Get an audition detail",
+                "operationId": "getAuditionDetail",
+                "parameters": [
+                    {
+                        "name": "application_id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
+                    },
+                    "403": {
+                        "description": "This action is unauthorized."
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/auditions/{application_id}/accept": {
+            "get": {
+                "tags": [
+                    "Audition"
+                ],
+                "summary": "Change status to accepted",
+                "description": "Change the status to: accepted for audition by application id",
+                "operationId": "changeAuditionStatusToAccepted",
+                "parameters": [
+                    {
+                        "name": "application_id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
+                    },
+                    "403": {
+                        "description": "This action is unauthorized."
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/auditions/{application_id}/reject": {
+            "post": {
+                "tags": [
+                    "Audition"
+                ],
+                "summary": "Change status to reject",
+                "description": "Change the status to: reject for audition by application id",
+                "operationId": "changeAuditionStatusToRejected",
+                "parameters": [
+                    {
+                        "name": "application_id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "reason": {
+                                        "description": "reason of rejection",
+                                        "type": "string",
+                                        "example": "Some message will be here..."
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
+                    },
+                    "403": {
+                        "description": "This action is unauthorized."
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/auditions/{application_id}/direct-message": {
+            "post": {
+                "tags": [
+                    "Audition"
+                ],
+                "summary": "Send a direct message",
+                "description": "Send a direct message for project owner",
+                "operationId": "sendAuditionDirectMessage",
+                "parameters": [
+                    {
+                        "name": "application_id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "message": {
+                                        "description": "message for project owner",
+                                        "type": "string",
+                                        "example": "Some message will be here..."
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
+                    },
+                    "403": {
+                        "description": "This action is unauthorized."
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/actor/badge": {
+            "get": {
+                "tags": [
+                    "Actor"
+                ],
+                "summary": "Get badge count notifications",
+                "description": "Get badge count notifications",
+                "operationId": "getBadgeCount",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
+                    },
+                    "403": {
+                        "description": "This action is unauthorized."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/actor/resend-verification-code": {
+            "post": {
+                "tags": [
+                    "Actor"
+                ],
+                "summary": "Resend verification code",
+                "description": "Resend a verification code if for some reasons user  did not receive a code",
+                "operationId": "resendVerificationCode",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "This action is unauthorized."
+                    },
+                    "429": {
+                        "description": "Too Many Requests"
+                    },
+                    "500": {
+                        "description": "Unsupported parameter gateway"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/actor/verification": {
+            "post": {
+                "tags": [
+                    "Actor"
+                ],
+                "summary": "Actor verification",
+                "description": "Actor verification with code. If verification, successful actor get full access.",
+                "operationId": "createVerification",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "code"
+                                ],
+                                "properties": {
+                                    "code": {
+                                        "description": "Verification code",
+                                        "type": "string",
+                                        "example": "1234"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "This action is unauthorized."
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/actor/register": {
+            "post": {
+                "tags": [
+                    "Actor"
+                ],
+                "summary": "Create a new actor",
+                "description": "Create a new actor",
+                "operationId": "createNewActor",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "first_name",
+                                    "last_name",
+                                    "email",
+                                    "password",
+                                    "password_confirmation"
+                                ],
+                                "properties": {
+                                    "first_name": {
+                                        "description": "User's first name",
+                                        "type": "string",
+                                        "example": "Ivan"
+                                    },
+                                    "last_name": {
+                                        "description": "User's last name",
+                                        "type": "string",
+                                        "example": "Ivanov"
+                                    },
+                                    "phone_number": {
+                                        "description": "Phone number",
+                                        "type": "string",
+                                        "example": "+4731005403"
+                                    },
+                                    "email": {
+                                        "description": "User's email",
+                                        "type": "string",
+                                        "example": "admin@gmail.com"
+                                    },
+                                    "password": {
+                                        "description": "User's password",
+                                        "type": "password",
+                                        "example": "Ss12345678_#"
+                                    },
+                                    "password_confirmation": {
+                                        "description": "Confirmation password",
+                                        "type": "password",
+                                        "example": "Ss12345678_#"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    }
+                }
+            }
+        },
+        "/actor/login": {
+            "post": {
+                "tags": [
+                    "Actor"
+                ],
+                "summary": "Fetch a bearer token",
+                "description": "",
+                "operationId": "loginActor",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "description": "User's email",
+                                        "type": "string",
+                                        "example": "admin@gmail.com"
+                                    },
+                                    "password": {
+                                        "description": "User's password.",
+                                        "type": "password",
+                                        "format": "password",
+                                        "example": "Ss12345678_#"
+                                    },
+                                    "remember_me": {
+                                        "description": "Increase tokens lifetime",
+                                        "example": "false"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Missing user or incorrect email / password"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    }
+                }
+            }
+        },
+        "/actor/refresh-access-token": {
+            "post": {
+                "tags": [
+                    "Actor"
+                ],
+                "summary": "Fetch a new access & refresh token pair",
+                "description": "To get a new token pair: access_tokens & refresh_tokens you need a valid refresh_token",
+                "operationId": "actorRefreshAccessRefreshToken",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "remember_me": {
+                                        "description": "Increase tokens lifetime",
+                                        "example": "false"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/actor/logout": {
+            "post": {
+                "tags": [
+                    "Actor"
+                ],
+                "summary": "Actor logout",
+                "description": "Actor logout",
+                "operationId": "actorLogout",
+                "responses": {
+                    "204": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/actor/forgot-password": {
+            "post": {
+                "tags": [
+                    "Actor"
+                ],
+                "summary": "Fetch a token for reset password",
+                "description": "",
+                "operationId": "forgotPassword",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "gateway",
+                                    "receiver"
+                                ],
+                                "properties": {
+                                    "gateway": {
+                                        "description": "Gateway",
+                                        "type": "string",
+                                        "example": "sms or email"
+                                    },
+                                    "receiver": {
+                                        "description": "User's email or phone number",
+                                        "type": "string",
+                                        "example": "admin@gmail.com or +4731005403"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "422": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/actor/check-reset-password-code": {
+            "post": {
+                "tags": [
+                    "Actor"
+                ],
+                "summary": "Check code",
+                "description": "If the code is valid, the user can proceed to the next step",
+                "operationId": "checkResetPasswordCode",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "code"
+                                ],
+                                "properties": {
+                                    "code": {
+                                        "description": "Reset code",
+                                        "type": "string",
+                                        "example": "12345678"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "403": {
+                        "description": "This action is unauthorized."
+                    },
+                    "422": {
+                        "description": "\\"
+                    }
+                }
+            }
+        },
+        "/actor/reset-password": {
+            "put": {
+                "tags": [
+                    "Actor"
+                ],
+                "summary": "Reset password",
+                "description": "Reset password for an actor",
+                "operationId": "resetPasswordForActor",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "code",
+                                    "gateway",
+                                    "receiver",
+                                    "password_confirmation",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "code": {
+                                        "description": "Reset code",
+                                        "type": "string",
+                                        "example": "12345678"
+                                    },
+                                    "gateway": {
+                                        "description": "Gateway",
+                                        "type": "string",
+                                        "example": "sms or email"
+                                    },
+                                    "receiver": {
+                                        "description": "User's email or phone number",
+                                        "type": "string",
+                                        "example": "admin@gmail.com or +4731005403"
+                                    },
+                                    "password": {
+                                        "description": "Password",
+                                        "type": "password",
+                                        "example": "Ss12345678_#"
+                                    },
+                                    "password_confirmation": {
+                                        "description": "Confirmation password",
+                                        "type": "password",
+                                        "example": "Ss12345678_#"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "422": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/actor/fcm": {
+            "post": {
+                "tags": [
+                    "Actor"
+                ],
+                "summary": "Update Actor FCM token",
+                "description": "Update FCM token for actor",
+                "operationId": "3ff4bc9c1e806ea3c10d82532853c981",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "fcm_token"
+                                ],
+                                "properties": {
+                                    "fcm_token": {
+                                        "description": "FCM token",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
+                    },
+                    "403": {
+                        "description": "This action is unauthorized."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/currencies": {
+            "get": {
+                "tags": [
+                    "Currency"
+                ],
+                "summary": "Get currencies",
+                "description": "Get currency list",
+                "operationId": "getCurrencies",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
+                    },
+                    "403": {
+                        "description": "This action is unauthorized."
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/ethnicities": {
+            "get": {
+                "tags": [
+                    "Ethnicity"
+                ],
+                "summary": "Get ethnicities",
+                "description": "Get ethnicity list",
+                "operationId": "getEthnicities",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
+                    },
+                    "403": {
+                        "description": "This action is unauthorized."
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/genres": {
+            "get": {
+                "tags": [
+                    "Genre"
+                ],
+                "summary": "Get genres",
+                "description": "Get genre list",
+                "operationId": "getGenres",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "403": {
+                        "description": "This action is unauthorized."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/actor/headshots": {
+            "post": {
+                "tags": [
+                    "Actor"
+                ],
+                "summary": "Upload a headshot",
+                "description": "Upload a headshot",
+                "operationId": "uploadHeadshot",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "headshot"
+                                ],
+                                "properties": {
+                                    "headshots": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "headshot": {
+                                                    "description": "headshot",
+                                                    "type": "string",
+                                                    "example": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAApgAAAKYB3X3/OAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAANCSURBVEiJtZZPbBtFFMZ/M7ubXdtdb1xSFyeilBapySVU8h8OoFaooFSqiihIVIpQBKci6KEg9Q6H9kovIHoCIVQJJCKE1ENFjnAgcaSGC6rEnxBwA04Tx43t2FnvDAfjkNibxgHxnWb2e/u992bee7tCa00YFsffekFY+nUzFtjW0LrvjRXrCDIAaPLlW0nHL0SsZtVoaF98mLrx3pdhOqLtYPHChahZcYYO7KvPFxvRl5XPp1sN3adWiD1ZAqD6XYK1b/dvE5IWryTt2udLFedwc1+9kLp+vbbpoDh+6TklxBeAi9TL0taeWpdmZzQDry0AcO+jQ12RyohqqoYoo8RDwJrU+qXkjWtfi8Xxt58BdQuwQs9qC/afLwCw8tnQbqYAPsgxE1S6F3EAIXux2oQFKm0ihMsOF71dHYx+f3NND68ghCu1YIoePPQN1pGRABkJ6Bus96CutRZMydTl+TvuiRW1m3n0eDl0vRPcEysqdXn+jsQPsrHMquGeXEaY4Yk4wxWcY5V/9scqOMOVUFthatyTy8QyqwZ+kDURKoMWxNKr2EeqVKcTNOajqKoBgOE28U4tdQl5p5bwCw7BWquaZSzAPlwjlithJtp3pTImSqQRrb2Z8PHGigD4RZuNX6JYj6wj7O4TFLbCO/Mn/m8R+h6rYSUb3ekokRY6f/YukArN979jcW+V/S8g0eT/N3VN3kTqWbQ428m9/8k0P/1aIhF36PccEl6EhOcAUCrXKZXXWS3XKd2vc/TRBG9O5ELC17MmWubD2nKhUKZa26Ba2+D3P+4/MNCFwg59oWVeYhkzgN/JDR8deKBoD7Y+ljEjGZ0sosXVTvbc6RHirr2reNy1OXd6pJsQ+gqjk8VWFYmHrwBzW/n+uMPFiRwHB2I7ih8ciHFxIkd/3Omk5tCDV1t+2nNu5sxxpDFNx+huNhVT3/zMDz8usXC3ddaHBj1GHj/As08fwTS7Kt1HBTmyN29vdwAw+/wbwLVOJ3uAD1wi/dUH7Qei66PfyuRj4Ik9is+hglfbkbfR3cnZm7chlUWLdwmprtCohX4HUtlOcQjLYCu+fzGJH2QRKvP3UNz8bWk1qMxjGTOMThZ3kvgLI5AzFfo379UAAAAASUVORK5CYII="
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
+                    },
+                    "403": {
+                        "description": "This action is unauthorized."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/actor/headshots/{id}": {
+            "delete": {
+                "tags": [
+                    "Actor"
+                ],
+                "summary": "Delete a headshot",
+                "description": "Delete a headshot",
+                "operationId": "deleteHeadshot",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Unauthenticated. / This action is unauthorized."
+                    },
+                    "403": {
+                        "description": "This action is unauthorized."
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/material-types": {
+            "get": {
+                "tags": [
+                    "MaterialType"
+                ],
+                "summary": "Get material types",
+                "description": "Get material type list",
+                "operationId": "getMaterialTypeList",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
+                    },
+                    "403": {
+                        "description": "This action is unauthorized."
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/payment-types": {
+            "get": {
+                "tags": [
+                    "PaymentType"
+                ],
+                "summary": "Get payment types",
+                "description": "Get payment type list. When a is_single field is set to TRUE, then the fields: rate, currency are not included in the filtering.",
+                "operationId": "getPaymentTypes",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
+                    },
+                    "403": {
+                        "description": "This action is unauthorized."
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/personal-skills": {
+            "get": {
+                "tags": [
+                    "PersonalSkill"
+                ],
+                "summary": "Get personal skills",
+                "description": "Get personal skill list",
+                "operationId": "getPersonalSkills",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
+                    },
+                    "403": {
+                        "description": "This action is unauthorized."
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/actor/me/update": {
+            "post": {
+                "tags": [
+                    "Actor"
+                ],
+                "summary": "Update an actor",
+                "description": "Update an actor",
+                "operationId": "updateActor",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "first_name",
+                                    "last_name"
+                                ],
+                                "properties": {
+                                    "first_name": {
+                                        "description": "first name",
+                                        "type": "string",
+                                        "example": "Ivan"
+                                    },
+                                    "last_name": {
+                                        "description": "last name",
+                                        "type": "string",
+                                        "example": "Ivanov"
+                                    },
+                                    "bio": {
+                                        "description": "bio",
+                                        "type": "string",
+                                        "example": "Some text will be here..."
+                                    },
+                                    "city": {
+                                        "description": "city",
+                                        "type": "string",
+                                        "example": "Kyiv"
+                                    },
+                                    "skill_list[]": {
+                                        "description": "skill list",
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "ethnicity_id": {
+                                        "description": "ethnicity id",
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "acting_gender[]": {
+                                        "description": "Acting gender: Male - 0; Female - 1; Other - 2;"
+                                    },
+                                    "min_age": {
+                                        "description": "min age",
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "max_age": {
+                                        "description": "max age",
+                                        "type": "string",
+                                        "example": "100"
+                                    },
+                                    "pseudonym": {
+                                        "description": "pseudonym",
+                                        "type": "string",
+                                        "example": "Vortex"
+                                    },
+                                    "behance_link": {
+                                        "description": "behance link",
+                                        "type": "string",
+                                        "example": "https://www.behance.net/vortex"
+                                    },
+                                    "instagram_link": {
+                                        "description": "instagram link",
+                                        "type": "string",
+                                        "example": "https://www.instagram.com/natgeo/"
+                                    },
+                                    "youtube_link": {
+                                        "description": "instagram link",
+                                        "type": "string",
+                                        "example": "https://www.youtube.com/channel/UCpVm7bg6pXKo1Pr6k5kxG9A"
+                                    },
+                                    "facebook_link": {
+                                        "description": "instagram link",
+                                        "type": "string",
+                                        "example": "https://www.facebook.com/natgeo"
+                                    },
+                                    "headshots[]": {
+                                        "description": "headshot",
+                                        "type": "string",
+                                        "example": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAApgAAAKYB3X3/OAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAANCSURBVEiJtZZPbBtFFMZ/M7ubXdtdb1xSFyeilBapySVU8h8OoFaooFSqiihIVIpQBKci6KEg9Q6H9kovIHoCIVQJJCKE1ENFjnAgcaSGC6rEnxBwA04Tx43t2FnvDAfjkNibxgHxnWb2e/u992bee7tCa00YFsffekFY+nUzFtjW0LrvjRXrCDIAaPLlW0nHL0SsZtVoaF98mLrx3pdhOqLtYPHChahZcYYO7KvPFxvRl5XPp1sN3adWiD1ZAqD6XYK1b/dvE5IWryTt2udLFedwc1+9kLp+vbbpoDh+6TklxBeAi9TL0taeWpdmZzQDry0AcO+jQ12RyohqqoYoo8RDwJrU+qXkjWtfi8Xxt58BdQuwQs9qC/afLwCw8tnQbqYAPsgxE1S6F3EAIXux2oQFKm0ihMsOF71dHYx+f3NND68ghCu1YIoePPQN1pGRABkJ6Bus96CutRZMydTl+TvuiRW1m3n0eDl0vRPcEysqdXn+jsQPsrHMquGeXEaY4Yk4wxWcY5V/9scqOMOVUFthatyTy8QyqwZ+kDURKoMWxNKr2EeqVKcTNOajqKoBgOE28U4tdQl5p5bwCw7BWquaZSzAPlwjlithJtp3pTImSqQRrb2Z8PHGigD4RZuNX6JYj6wj7O4TFLbCO/Mn/m8R+h6rYSUb3ekokRY6f/YukArN979jcW+V/S8g0eT/N3VN3kTqWbQ428m9/8k0P/1aIhF36PccEl6EhOcAUCrXKZXXWS3XKd2vc/TRBG9O5ELC17MmWubD2nKhUKZa26Ba2+D3P+4/MNCFwg59oWVeYhkzgN/JDR8deKBoD7Y+ljEjGZ0sosXVTvbc6RHirr2reNy1OXd6pJsQ+gqjk8VWFYmHrwBzW/n+uMPFiRwHB2I7ih8ciHFxIkd/3Omk5tCDV1t+2nNu5sxxpDFNx+huNhVT3/zMDz8usXC3ddaHBj1GHj/As08fwTS7Kt1HBTmyN29vdwAw+/wbwLVOJ3uAD1wi/dUH7Qei66PfyuRj4Ik9is+hglfbkbfR3cnZm7chlUWLdwmprtCohX4HUtlOcQjLYCu+fzGJH2QRKvP3UNz8bWk1qMxjGTOMThZ3kvgLI5AzFfo379UAAAAASUVORK5CYII="
+                                    },
+                                    "selftapes[]": {
+                                        "description": "Selftape",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
+                    },
+                    "403": {
+                        "description": "This action is unauthorized."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/actor/me/settings": {
+            "patch": {
+                "tags": [
+                    "Actor"
+                ],
+                "summary": "Update actor settings",
+                "description": "Update actor settings",
+                "operationId": "updateActorSettings",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "allow_app_notification": {
+                                        "type": "boolean",
+                                        "example": "true"
+                                    },
+                                    "role_approve_notification": {
+                                        "type": "boolean",
+                                        "example": "true"
+                                    },
+                                    "role_reject_notification": {
+                                        "type": "boolean",
+                                        "example": "true"
+                                    },
+                                    "role_offer_notification": {
+                                        "type": "boolean",
+                                        "example": "true"
+                                    },
+                                    "audition_notification": {
+                                        "type": "boolean",
+                                        "example": "true"
+                                    },
+                                    "selftape_notification": {
+                                        "type": "boolean",
+                                        "example": "true"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
+                    },
+                    "403": {
+                        "description": "This action is unauthorized."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/project-types": {
+            "get": {
+                "tags": [
+                    "ProjectType"
+                ],
+                "summary": "Get project types",
+                "description": "Get project type list",
+                "operationId": "getProjectTypeList",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
+                    },
+                    "403": {
+                        "description": "This action is unauthorized."
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/recommend-roles/{application_id}/detail": {
+            "get": {
+                "tags": [
+                    "RecommendRole"
+                ],
+                "summary": "Get a recommend role detail",
+                "description": "Get a recommend role detail",
+                "operationId": "getRecommendRoleDetail",
+                "parameters": [
+                    {
+                        "name": "application_id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
+                    },
+                    "403": {
+                        "description": "This action is unauthorized."
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/recommend-roles/{application_id}/accept": {
+            "get": {
+                "tags": [
+                    "RecommendRole"
+                ],
+                "summary": "Accept a recommend role",
+                "description": "Accept a recommend role",
+                "operationId": "acceptRecommendRole",
+                "parameters": [
+                    {
+                        "name": "application_id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
+                    },
+                    "403": {
+                        "description": "This action is unauthorized."
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/recommend-roles/{application_id}/reject": {
+            "get": {
+                "tags": [
+                    "RecommendRole"
+                ],
+                "summary": "Reject a recommend role",
+                "description": "Reject a recommend role",
+                "operationId": "rejectRecommendRole",
+                "parameters": [
+                    {
+                        "name": "application_id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
+                    },
+                    "403": {
+                        "description": "This action is unauthorized."
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/roles": {
+            "get": {
+                "tags": [
+                    "Role"
+                ],
+                "summary": "Fetch roles",
+                "description": "Fetch roles",
+                "operationId": "fetchRoles",
+                "parameters": [
+                    {
+                        "name": "filterByCompanies[]",
+                        "in": "query",
+                        "description": "array of ids",
+                        "required": false
+                    },
+                    {
+                        "name": "filterByGenres[]",
+                        "in": "query",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "integer"
+                            }
+                        }
+                    },
+                    {
+                        "name": "filterByCountry",
+                        "in": "query",
+                        "description": "Country ID",
+                        "required": false
+                    },
+                    {
+                        "name": "filterByLocations[]",
+                        "in": "query",
+                        "description": "array of cities",
+                        "required": false
+                    },
+                    {
+                        "name": "filterByAddress",
+                        "in": "query",
+                        "description": "Address",
+                        "required": false
+                    },
+                    {
+                        "name": "filterByActingGender",
+                        "in": "query",
+                        "description": "Acting gender ID",
+                        "required": false
+                    },
+                    {
+                        "name": "filterByCurrency",
+                        "in": "query",
+                        "description": "Currency ID",
+                        "required": false
+                    },
+                    {
+                        "name": "filterPaymentTypeExcludeIds[]",
+                        "in": "query",
+                        "description": "Payment type exclude IDs",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "integer"
+                            }
+                        }
+                    },
+                    {
+                        "name": "filterByPaymentType",
+                        "in": "query",
+                        "description": "Payment type ID",
+                        "required": false
+                    },
+                    {
+                        "name": "disableSpecificPaymentTypes",
+                        "in": "query",
+                        "description": "Payment types that contain a field 'is_single' will be excluded",
+                        "required": false
+                    },
+                    {
+                        "name": "filterByRate[min]",
+                        "in": "query",
+                        "description": "Min rate",
+                        "required": false
+                    },
+                    {
+                        "name": "filterByRate[max]",
+                        "in": "query",
+                        "description": "Max rate",
+                        "required": false
+                    },
+                    {
+                        "name": "filterByPickShootingDates[0]",
+                        "in": "query",
+                        "description": "Start date (2022-08-31)",
+                        "required": false
+                    },
+                    {
+                        "name": "filterByPickShootingDates[1]",
+                        "in": "query",
+                        "description": "End date (2022-09-31)",
+                        "required": false
+                    },
+                    {
+                        "name": "filterByApplicationDeadline[0]",
+                        "in": "query",
+                        "description": "Start date (2022-08-31)",
+                        "required": false
+                    },
+                    {
+                        "name": "filterByApplicationDeadline[1]",
+                        "in": "query",
+                        "description": "End date (2022-09-31)",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/roles/filter-tools": {
+            "get": {
+                "tags": [
+                    "Role"
+                ],
+                "description": "Getting multiple filter lists",
+                "operationId": "fetchFilterTools",
+                "parameters": [
+                    {
+                        "name": "currency_id",
+                        "in": "query",
+                        "description": "Currency ID",
+                        "required": false
+                    },
+                    {
+                        "name": "payment_type_id",
+                        "in": "query",
+                        "description": "Payment type ID",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/roles/{id}": {
+            "get": {
+                "tags": [
+                    "Role"
+                ],
+                "summary": "Fetch a role",
+                "description": "Fetch a role by role ID",
+                "operationId": "fetchRole",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
+                    },
+                    "403": {
+                        "description": "This action is unauthorized."
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/roles/min-max-rate": {
+            "post": {
+                "tags": [
+                    "Role"
+                ],
+                "summary": "Fetch min rate/max rate",
+                "description": "Fetch the maximum/minimum rate of the roles",
+                "operationId": "fetchRoleMinMaxRate",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "currency_id",
+                                    "payment_type_id"
+                                ],
+                                "properties": {
+                                    "currency_id": {
+                                        "description": "currency ID",
+                                        "type": "integer",
+                                        "example": "2"
+                                    },
+                                    "payment_type_id": {
+                                        "description": "payment ype ID",
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
+                    },
+                    "403": {
+                        "description": "This action is unauthorized."
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/roles/cities": {
+            "get": {
+                "tags": [
+                    "Role"
+                ],
+                "summary": "Fetch role cities",
+                "description": "Fetch role cities",
+                "operationId": "fetchRoleCities",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
+                    },
+                    "403": {
+                        "description": "This action is unauthorized."
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/roles/bookmarks": {
+            "get": {
+                "tags": [
+                    "Role"
+                ],
+                "summary": "Fetch roles bookmarks",
+                "description": "Fetch roles bookmarks",
+                "operationId": "fetchRolesBookmarks",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/roles/bookmarks/role/{id}/add": {
+            "get": {
+                "tags": [
+                    "Role"
+                ],
+                "summary": "Add a role to bookmarks",
+                "description": "Add a role to bookmarks",
+                "operationId": "addRoleToBookmark",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Role ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/roles/bookmarks/role/{id}/remove": {
+            "get": {
+                "tags": [
+                    "Role"
+                ],
+                "summary": "Remove a role from bookmarks",
+                "description": "Remove a role from bookmarks",
+                "operationId": "RemoveRoleFromBookmarks",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Role ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/actor/selftapes": {
+            "post": {
+                "tags": [
+                    "Actor"
+                ],
+                "summary": "Upload a selftape",
+                "description": "Upload a selftape",
+                "operationId": "uploadSelftape",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "video[]"
+                                ],
+                                "properties": {
+                                    "video[]": {
+                                        "description": "Selftape",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
+                    },
+                    "403": {
+                        "description": "This action is unauthorized."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/actor/selftapes/{id}": {
+            "delete": {
+                "tags": [
+                    "Actor"
+                ],
+                "summary": "Delete a selftape",
+                "description": "Delete a selftape",
+                "operationId": "deleteSelftape",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Unauthenticated. / This action is unauthorized."
+                    },
+                    "403": {
+                        "description": "This action is unauthorized."
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/settings": {
+            "get": {
+                "tags": [
+                    "Setting"
+                ],
+                "summary": "Get general settings",
+                "description": "Get general settings",
+                "operationId": "getSettings",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "name": "bearerAuth",
+                "in": "header",
+                "bearerFormat": "sanctum",
+                "scheme": "bearer"
+            }
+        }
+    }
+}

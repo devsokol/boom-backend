@@ -1,0 +1,72 @@
+# For more information: https://laravel.com/docs/sail
+version: '3'
+services:
+    app.boompp.local:
+        container_name: boompp-app
+        #hostname: boompp
+        #domainname: app.boompp.local
+        build:
+            context: ./docker/8.2
+            dockerfile: Dockerfile
+            args:
+                WWWGROUP: '${WWWGROUP}'
+                XDEBUG: '${APP_DEBUG:-false}'
+                XDEBUG_PORT: '${SAIL_XDEBUG_PORT:-9003}'
+        image: sail-xdebug-8.2/app
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
+        ports:
+            #- '${APP_PORT:-80}:80'
+            - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
+        expose:
+            - "9003"
+        environment:
+            WWWUSER: '${WWWUSER}'
+        volumes:
+            - '.:/var/www/html'
+            - ./docker/8.2/nginx.conf:/etc/nginx/nginx.conf
+            - ./docker/8.2/php-fpm.conf:/etc/php/8.2/fpm/pool.d/www.conf
+            #- ./docker/8.2/php-fpm.conf:/usr/local/etc/php-fpm.d/www.conf
+            - ./storage/logs/nginx/:/var/log/nginx
+        networks:
+            - boom-network
+        depends_on:
+            - pgsql
+    nginx:
+        container_name: boompp-nginx
+        image: nginx:1.18
+        ports:
+            - '${APP_PORT:-80}:80'
+        volumes:
+            - .:/var/www/html
+            - ./docker/8.2/nginx.conf:/etc/nginx/nginx.conf
+            - ./storage/logs/nginx/:/var/log/nginx
+        depends_on:
+            - app.boompp.local
+        networks:
+            - boom-network
+    pgsql:
+        container_name: boompp-db
+        image: 'postgres:15'
+        ports:
+            - '${FORWARD_DB_PORT:-5432}:5432'
+        environment:
+            PGPASSWORD: '${DB_PASSWORD:-secret}'
+            POSTGRES_DB: '${DB_DATABASE}'
+            POSTGRES_USER: '${DB_USERNAME}'
+            POSTGRES_PASSWORD: '${DB_PASSWORD:-secret}'
+        volumes:
+            - 'sail-pgsql:/var/lib/postgresql/data'
+            - './vendor/laravel/sail/database/pgsql/create-testing-database.sql:/docker-entrypoint-initdb.d/10-create-testing-database.sql'
+        networks:
+            - boom-network
+        healthcheck:
+            test: ["CMD", "pg_isready", "-q", "-d", "${DB_DATABASE}", "-U", "${DB_USERNAME}"]
+            retries: 3
+            timeout: 5s
+networks:
+    boom-network:
+        driver: bridge
+volumes:
+    sail-pgsql:
+        driver: local

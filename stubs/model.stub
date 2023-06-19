@@ -1,0 +1,67 @@
+<?php
+
+namespace {{ namespace }};
+
+use App\Traits\Model\HasProtectedRouteBinding;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class {{ class }} extends BaseModel
+{
+    use HasFactory;
+    use HasProtectedRouteBinding;
+
+    /*
+    |--------------------------------------------------------------------------
+    | GLOBAL VARIABLES
+    |--------------------------------------------------------------------------
+    */
+    // const CREATED_AT = 'created_date';
+    // const UPDATED_AT = 'last_update';
+
+    // protected $table = 'users';
+    // protected $primaryKey = 'your_key_name'; // or null
+    // public $incrementing = false;
+    // public $timestamps = false;
+    // protected $touches = ['post'];
+
+    // protected $appends = [];
+    // protected $connection = 'conn-name';
+    // protected $casts = ['is_admin' => 'boolean'];
+    // protected $guarded = ['id_test'];
+    // protected $dateFormat = 'd-m-Y';
+    // protected $fillable = [];
+    // protected $hidden = ['password', 'remember_token'];
+    // protected $dates = [];
+    // protected $perPage = 25;
+
+    /*
+    |--------------------------------------------------------------------------
+    | RELATIONS
+    |--------------------------------------------------------------------------
+    */
+
+    /*
+    |--------------------------------------------------------------------------
+    | SCOPES
+    |--------------------------------------------------------------------------
+    */
+
+    /*
+    |--------------------------------------------------------------------------
+    | ACCESSORS
+    |--------------------------------------------------------------------------
+    */
+
+    /*
+    |--------------------------------------------------------------------------
+    | MUTATORS
+    |--------------------------------------------------------------------------
+    */
+
+    /*
+    |--------------------------------------------------------------------------
+    | FUNCTIONS
+    |--------------------------------------------------------------------------
+    */
+}

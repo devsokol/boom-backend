@@ -1,0 +1,90 @@
+grumphp:
+  hide_circumvention_tip: true
+  process_timeout: 120
+  stop_on_failure: false
+  ignore_unstaged_changes: false
+  tasks:
+    phpversion:
+      project: '^8.2'
+    #phplint:
+    #  triggered_by: ['php', 'phtml']
+    #  metadata:
+    #    priority: 200
+    jsonlint:
+      detect_key_conflicts: true
+      metadata:
+        priority: 100
+    xmllint:
+      ignore_patterns:
+        - "#test/(.*).xml#"
+      metadata:
+        priority: 100
+    composer:
+      file: ./composer.json
+      no_check_all: true
+      no_check_lock: false
+      no_check_publish: false
+      with_dependencies: false
+      strict: false
+      metadata:
+        priority: 80
+    # catch not allowed keywords
+    git_blacklist:
+      whitelist_patterns:
+        - src
+      keywords:
+        # - "\\.dev"
+        # - "\\.local"
+        # - "\\.test"
+        - "<<<<<<<"
+        - "======="
+        - "DebuggerUtility"
+        - "ObjectManager::getInstance"
+        - "_GET\\["
+        - "_POST\\["
+        - "_REQUEST\\["
+        - "console.log\\("
+        - "die\\("
+        - "die;"
+        - "exit\\("
+        - "exit;"
+        - "fileadmin"
+        # - "localhost"
+        - "phpinfo"
+        - "phpinfo\\("
+        - "print_r\\("
+        - "var_dump\\("
+        - "_objectManager"
+        - "ObjectManagerInterface"
+      triggered_by: ['php', 'js', 'html', 'phtml']
+      metadata:
+        priority: 90
+    #phpinsights: ~
+    #larastan: ~
+    laravel_pint:
+      metadata:
+        priority: 200
+    # phpunit:
+    #   always_execute: true
+    securitychecker_enlightn:
+      lockfile: ./composer.lock
+      run_always: false
+services:
+  GrumPHP\Tasks\PhpInsightsTask:
+    arguments:
+      - '@process_builder'
+      - '@formatter.raw_process'
+    tags:
+      - {name: grumphp.task, task: phpinsights}
+  GrumPHP\Tasks\LaravelPintTask:
+    arguments:
+      - '@process_builder'
+      - '@formatter.raw_process'
+    tags:
+      - { name: grumphp.task, task: laravel_pint }
+  GrumPHP\Tasks\PhpStanTask:
+    arguments:
+      - '@process_builder'
+      - '@formatter.raw_process'
+    tags:
+      - { name: grumphp.task, task: larastan }
